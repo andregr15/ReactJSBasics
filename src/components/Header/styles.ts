@@ -1,8 +1,26 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 interface ContainerProps {
   size?: 'small' | 'large';
 }
+
+interface NavProps {
+  selected: boolean;
+}
+
+export const Nav = styled(Link)<NavProps>`
+  &:after {
+    content: "";
+    height: 3px;
+    background-color: #c0696b;
+    width: 100%;    
+    margin-top: 10px;
+    ${({selected}) => selected && 
+        css`display: block;`
+    }
+  }
+`
 
 export const Container = styled.div<ContainerProps>`
   background: #5636d3;
@@ -17,6 +35,14 @@ export const Container = styled.div<ContainerProps>`
     justify-content: space-between;
 
     nav {
+      display: flex;
+
+      div {
+        & + div {
+          margin-left: 32px;
+        }
+      }
+
       a {
         color: #fff;
         text-decoration: none;
